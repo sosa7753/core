@@ -9,12 +9,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderServiceImpl implements OrderService {
 
-  // final은 무조건 할당이 되어있어야함.
+  // final은 무조건 할당이 되어있어야함. 하나라도 빠지면 에러
   private final MemberRepository memberRepository;
   private final DiscountPolicy discountPolicy;
 
-  @Autowired
   public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    System.out.println("memberRepository = " + memberRepository);
+    System.out.println("discountPolicy = " + discountPolicy);
     this.memberRepository = memberRepository;
     this.discountPolicy = discountPolicy;
   }
