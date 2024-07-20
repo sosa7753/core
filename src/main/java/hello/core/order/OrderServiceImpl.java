@@ -3,12 +3,11 @@ package hello.core.order;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor // final에 대해 생성자 할당
 public class OrderServiceImpl implements OrderService {
 
   // final은 무조건 할당이 되어있어야함. 하나라도 빠지면 에러
@@ -16,11 +15,22 @@ public class OrderServiceImpl implements OrderService {
   private final DiscountPolicy discountPolicy;
 
   // 이 구체화에 의존하지 않으려면 누군가 구현 객체를 대신 생성해서 주입해 줘야한다.
+  @Autowired
+  public OrderServiceImpl(MemberRepository memberRepository,DiscountPolicy discountPolicy) {
+    this.memberRepository = memberRepository;
+    this.discountPolicy = discountPolicy;
+  }
+
   @Override
   public Order createOrder(Long memberId, String itemName, int itemPrice) {
     Member member = memberRepository.findById(memberId);
     int discountPrice = discountPolicy.discount(member, itemPrice);
 
     return new Order(memberId, itemName, itemPrice, discountPrice);
+  }
+
+  // 테스트 용도
+  public MemberRepository getMemberRepository() {
+    return memberRepository;
   }
 }

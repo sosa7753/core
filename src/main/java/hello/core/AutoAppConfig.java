@@ -10,7 +10,7 @@ import org.springframework.context.annotation.FilterType;
 @Configuration
 @ComponentScan(
     // 특정 패키지 지정 가능 -> member 패키지만 적용
-    basePackages = "hello.core.member",  // {"", ""} 여러개도 가능
+    basePackages = "hello.core",  // {"", ""} 여러개도 가능
 
     // 만약 지정을 안한다면??
     // -> 이 설정 정보 클래스가 속한 패키지인 hello.core를 뒤짐.
