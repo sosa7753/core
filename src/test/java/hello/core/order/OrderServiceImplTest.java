@@ -1,7 +1,5 @@
 package hello.core.order;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import hello.core.discount.FixDiscountPolicy;
 import hello.core.member.Grade;
 import hello.core.member.Member;
